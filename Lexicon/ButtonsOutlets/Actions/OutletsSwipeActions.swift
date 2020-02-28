@@ -47,6 +47,10 @@ class OutletsSwipeActions {
     }
     
     func filterButton(){
-        
+        if SwipeDataModel.shared.filterIndex == 0 {
+        SwipeDataModel.shared.filterAllWords()
+        SetupSwipeButtons.shared.reloadWithNewWord()
+        delegate?.reload()
+        }
     }
 }

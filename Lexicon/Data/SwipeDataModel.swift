@@ -15,7 +15,7 @@ class SwipeDataModel {
     var problemWords = [String]()
     var lexiconWords = [String]()
     private var index = 0
-    
+    var filterIndex = 0
     func reset(){
         array.removeAll()
         problemWords.removeAll()
@@ -77,6 +77,11 @@ class SwipeDataModel {
     func isFinished()->Bool {
         guard array.count > 0 else {return true}
         return false
+    }
+    
+    func filterAllWords(){
+        array = DataModel.shared.getFilterProblemWords(array)
+        filterIndex += 1
     }
     
 }

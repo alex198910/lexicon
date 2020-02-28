@@ -17,11 +17,13 @@ class SetupSwipeButtons {
     var mainWord = UILabel()
     var superIndex = 0
     var filterButton = UIButton(type: .custom)
+    var indexLabel = UILabel()
     
     func setup(){
         mainWord.text = SwipeDataModel.shared.getNextWord()
         setupMainWordLabel()
         setupFilterButton()
+        setupIndexLabel()
     }
     
     func setupMainWordLabel(){
@@ -50,6 +52,7 @@ class SetupSwipeButtons {
                 self.mainWord.frame = frame
                 })
         mainWord.text = SwipeDataModel.shared.getNextWord()
+        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words"
         changScale()
     }
     
@@ -72,5 +75,16 @@ class SetupSwipeButtons {
     @objc func filterButtonAction(){
         OutletsSwipeActions.shared.filterButton()
      }
+    
+    func setupIndexLabel(){
+        guard let swipeView = selfView else {return}
+        swipeView.addSubview(indexLabel)
+        indexLabel.translatesAutoresizingMaskIntoConstraints = false
+        indexLabel.centerYAnchor.constraint(equalTo: swipeView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        indexLabel.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
+        indexLabel.textColor = UIColors.shared.getTextColour()
+        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words"
+        
+    }
     
 }
