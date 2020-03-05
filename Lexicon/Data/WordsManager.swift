@@ -20,6 +20,8 @@ class WordsManager {
         allWords.sort()
         allWords = deleteGarbage(allWords)
         allWords = removeDupl(allWords)
+        allWords.sort()
+        allWords = removeDupl(allWords)
         return (allWords)
     }
     

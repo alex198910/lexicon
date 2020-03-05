@@ -12,6 +12,7 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 
     let tableView = UITableView.init(frame: .zero, style: .plain)
     var link = [dictionary]()
+    var pushedButtom: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +58,14 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 120
      }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            link.remove(at: indexPath.row)
+            DataModel.shared.deleteWord(index: indexPath.row, source: pushedButtom ?? "")
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
+        }
+         tableView.reloadData()
+    }
     
     
     

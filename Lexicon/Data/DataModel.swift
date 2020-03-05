@@ -10,9 +10,15 @@ import UIKit
 
 // Управляет данными
 
-struct dictionary {
+struct dictionary: Comparable {
     var word: String?
     var translation: String?
+    
+    static func < (lhs: dictionary, rhs: dictionary) -> Bool {
+        let l: String = lhs.word ?? ""
+        let p: String = rhs.word ?? ""
+        return l < p
+        }
 }
 
 class DataModel {
@@ -46,22 +52,26 @@ class DataModel {
     
     // Вызывает метод сохранения в  CoreData переданного в нее лексикона
     private func saveNewLexicon(lexicon: [dictionary]){
-        Data.addLexicon(listOflexiconWords: lexicon)
+        let lex = filterDictionary(toSave: lexicon, coreData: getLexiconWords())
+        Data.addLexicon(listOflexiconWords: lex)
     }
     
     // Вызывает метод сохранения в  CoreData переданных в нее проблемных слов
     private func saveProblemWords(problemWords: [dictionary]){
-         Data.addProblemWords(listOfProblemWords: problemWords)
+        let problem = filterDictionary(toSave: problemWords, coreData: getProblemWords())
+         Data.addProblemWords(listOfProblemWords: problem)
     }
     
     // Получает массивы лексикона и проблемных слов, преобразует формат и вызывает сохранение в CoreData
     func saveFromSwipeController(_ lexicon: [String], _ problem: [String]){
         var good = [dictionary]()
         var bad = [dictionary]()
-        lexicon.forEach({body in
+        let lex = lexicon.sorted()
+        let prob = problem.sorted()
+        lex.forEach({body in
             good.append(dictionary.init(word: body, translation: ""))
         })
-        problem.forEach({body in
+        prob.forEach({body in
             bad.append(dictionary.init(word: body, translation: ""))
         })
         saveNewLexicon(lexicon: good)
@@ -86,6 +96,8 @@ class DataModel {
         return (newString)
     }
     
+    
+    // Возвращает отфильтрованную строку 
     func getFilterProblemWords(_ text: [String])-> [String]{
         var newString = [String]()
         let lexiconFromCoreData = convertDictionaryToString(getLexiconWords())
@@ -95,6 +107,45 @@ class DataModel {
         })
         
         return newString
+    }
+    
+    // удаляет одно слово из CoreData  по Index
+    func deleteWord(index: Int, source: String){
+        if source == "lexicon" {
+            Data.deleteOneLexiconWord(index)
+        }
+        if source == "problem" {
+            Data.deleteOneProblemWord(index)
+        }
+    }
+    
+    //  возвращает отфильтрованный массив слов (из переданных, отсутствующих в CoreData)
+    func filterDictionary(toSave: [dictionary], coreData: [dictionary])->[dictionary]{
+        var newDictionary = [dictionary]()
+        var coreDataString = convertDictionaryToString(coreData)
+        coreDataString.sort()
+        toSave.forEach({body in
+            if coreDataString.contains(body.word ?? ""){}
+            else {newDictionary.append(body) }
+        })
+        newDictionary.sort()
+        return(newDictionary)
+    }
+    
+    
+    func deleteDoublersInCoreData()
+    {
+        let reserveLexicon = getLexiconWords()
+        let reserveProblem = getProblemWords()
+        Data.cleanLexiconWords()
+        Data.cleanProblemWords()
+        saveNewLexicon(lexicon: reserveLexicon)
+        saveProblemWords(problemWords: reserveProblem)
+    }
+    
+    func sortDictionary(toSort: [dictionary])-> [dictionary]{
+        let newDictionary = [dictionary]()
+        return newDictionary
     }
     
 }

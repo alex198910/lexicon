@@ -45,14 +45,21 @@ class SetupSwipeButtons {
         mainWord.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
     }
     
-    func reloadWithNewWord(){
-        var frame = self.mainWord.frame
-                frame.origin.y = 0
+    func reloadWithOldWord(){
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-                self.mainWord.frame = frame
+            self.mainWord.frame = self.mainWord.frame.offsetBy(dx: 0, dy: 500)
                 })
         mainWord.text = SwipeDataModel.shared.getNextWord()
-        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words"
+        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
+        changScale()
+    }
+    
+    func reloadWithNewWord(){
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
+             self.mainWord.frame = self.mainWord.frame.offsetBy(dx: 0, dy: -500)
+                })
+        mainWord.text = SwipeDataModel.shared.getNextWord()
+        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         changScale()
     }
     
@@ -83,7 +90,7 @@ class SetupSwipeButtons {
         indexLabel.centerYAnchor.constraint(equalTo: swipeView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
         indexLabel.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
         indexLabel.textColor = UIColors.shared.getTextColour()
-        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words"
+        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         
     }
     

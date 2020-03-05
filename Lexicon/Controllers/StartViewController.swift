@@ -20,6 +20,7 @@ class StartViewController: UIViewController, ButtonDelegate {
         super.viewDidLoad()
         delgateSelf()
         setupView()
+        DataModel.shared.deleteDoublersInCoreData()
     }
     
     func delgateSelf(){

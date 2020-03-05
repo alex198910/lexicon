@@ -14,7 +14,7 @@ class SwipeDataModel {
     var array = [String]()
     var problemWords = [String]()
     var lexiconWords = [String]()
-    private var index = 0
+    var index = 0
     var filterIndex = 0
     func reset(){
         array.removeAll()

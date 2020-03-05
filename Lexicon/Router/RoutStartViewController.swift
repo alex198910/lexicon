@@ -25,6 +25,7 @@ class RoutStartViewController {
     func goToTableViewWithLexicon(){
         let tableVC = TableViewController()
         tableVC.link = DataModel.shared.getLexiconWords()
+        tableVC.pushedButtom = "lexicon"
         navigationController?.pushViewController(tableVC, animated: true)
     }
     
@@ -32,6 +33,7 @@ class RoutStartViewController {
     func goToTableViewWithBadWords(){
         let tableVC = TableViewController()
         tableVC.link = DataModel.shared.getProblemWords()
+        tableVC.pushedButtom = "problem"
         navigationController?.pushViewController(tableVC, animated: true)
     }
     

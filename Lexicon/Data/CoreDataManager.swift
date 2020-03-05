@@ -29,6 +29,7 @@ class CoreDataManager {
     lazy private var managedContextOfProblemWords: NSManagedObjectContext = persistentContainer.viewContext
     lazy private var managedContextOfLexiconWords: NSManagedObjectContext = persistentContainer.viewContext
     
+    
     func addLexicon(listOflexiconWords: [dictionary]){
         exchangeList = listOflexiconWords
         addWordsToCoreData(context: managedContextOfLexiconWords, entityName: "LexiconWords")
@@ -137,6 +138,30 @@ class CoreDataManager {
             i -= 1
         }
         savingContext(context: managedContextOfProblemWords)
+    }
+    
+    func deleteOneProblemWord(_ index: Int){
+        var problem = [ProblemWords]()
+        let fetch = ProblemWords.fetchRequestPW()
+        do {
+            problem = try managedContextOfProblemWords.fetch(fetch)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        managedContextOfProblemWords.delete(problem[index])
+        savingContext(context: managedContextOfProblemWords)
+    }
+    
+    func deleteOneLexiconWord(_ index: Int){
+        var lexicon = [LexiconWords]()
+        let fetch = LexiconWords.fetchRequestLW()
+        do {
+            lexicon = try managedContextOfLexiconWords.fetch(fetch)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        managedContextOfLexiconWords.delete(lexicon[index])
+        savingContext(context: managedContextOfLexiconWords)
     }
     
 }

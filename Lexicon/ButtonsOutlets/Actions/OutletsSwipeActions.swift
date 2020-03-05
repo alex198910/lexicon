@@ -19,25 +19,28 @@ class OutletsSwipeActions {
     
     func handleSwipe(_ sender: UISwipeGestureRecognizer)
     {
-        
         if sender.state == .ended {
             switch sender.direction {
             case .right:
                 SwipeDataModel.shared.addWordToProblem()
+                reload()
                 //selfView?.backgroundColor = .yellow
             case .left:
                 SwipeDataModel.shared.addWordToLexicon()
+                reload()
                 //selfView?.backgroundColor = .yellow
             case .up:
                 SwipeDataModel.shared.changeIndexManual()
+                reload()
                 //selfView?.backgroundColor = .yellow
             case .down:
                 SwipeDataModel.shared.changeIndexManualBack()
+                reloadBack()
                 //selfView?.backgroundColor = .yellow
             default:
                 break
             }
-            reload()
+            //reload()
         }
     }
     
@@ -45,6 +48,13 @@ class OutletsSwipeActions {
         SetupSwipeButtons.shared.reloadWithNewWord()
         delegate?.reload()
     }
+    
+    func reloadBack(){
+        SetupSwipeButtons.shared.reloadWithOldWord()
+        delegate?.reload()
+    }
+    
+    
     
     func filterButton(){
         if SwipeDataModel.shared.filterIndex == 0 {
