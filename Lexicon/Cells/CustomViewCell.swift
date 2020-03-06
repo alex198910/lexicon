@@ -14,6 +14,7 @@ class CustomViewCell: UITableViewCell {
     var EngText = UITextView()
     var TranslText = UITextView()
     var Delimetr = UITextView()
+    var indexSell: Int?
     
 
     override func awakeFromNib() {
@@ -49,6 +50,8 @@ class CustomViewCell: UITableViewCell {
         TranslText.textAlignment = .center
         TranslText.font = .systemFont(ofSize: 19, weight: .semibold)
         TranslText.textColor = .black
+        TranslText.isEditable = true
+    
     }
     
     func setupDelimetr(){
@@ -56,5 +59,6 @@ class CustomViewCell: UITableViewCell {
         Delimetr.frame = CGRect(x: (bounds.width / 2) - 5, y: 0, width: 10, height: bounds.height)
         Delimetr.backgroundColor = UIColors.shared.getTextColour()
     }
+
 
 }

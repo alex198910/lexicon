@@ -81,8 +81,8 @@
 		8410CBA724090CF20071F529 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				8410CBA424090CC90071F529 /* OutletsSwipeActions.swift */,
 				849265B62406B95300DE1F0A /* OutletsStartActions.swift */,
+				8410CBA424090CC90071F529 /* OutletsSwipeActions.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";

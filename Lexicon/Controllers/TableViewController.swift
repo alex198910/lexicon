@@ -48,10 +48,12 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomViewCell", for: indexPath) as? CustomViewCell else { print("else")
-              return UITableViewCell()
-          }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "CustomViewCell", for: indexPath) as? CustomViewCell else { print("else")
+            return UITableViewCell()
+        }
         cell.dict = link[indexPath.row]
+        cell.TranslText.delegate = self
+        cell.indexSell = indexPath.row
         return cell
     }
     
@@ -64,9 +66,20 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             DataModel.shared.deleteWord(index: indexPath.row, source: pushedButtom ?? "")
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
+
          tableView.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        print(indexPath.row)
+    }
+    
+
+    
+
+    
+//    func tableView
     
     
     
@@ -80,4 +93,16 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     */
 
+}
+
+extension TableViewController: UITextViewDelegate {
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        let x = textView.superview as! CustomViewCell
+        guard let i: Int = x.indexSell else {return}
+        link[i].translation = textView.text
+        print(link)
+        DataModel.shared.addWord(index: i, source: pushedButtom ?? "", toSave: link[i])
+        tableView.reloadData()
+    }
 }

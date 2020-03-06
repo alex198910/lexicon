@@ -15,7 +15,7 @@ class SwipeViewController: UIViewController, ReloadInputViews {
     var array = [String]()
     let SetupButtons = SetupSwipeButtons.shared
     let Actions = OutletsSwipeActions.shared
-    let DataModel = SwipeDataModel.shared
+    let SwDataModel = SwipeDataModel.shared
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +31,8 @@ class SwipeViewController: UIViewController, ReloadInputViews {
         Actions.delegate = self
         Actions.selfView = view
         SetupButtons.selfView = view
-        DataModel.reset()
-        DataModel.array = array
+        SwDataModel.reset()
+        SwDataModel.array = array
         
     }
     
@@ -60,14 +60,14 @@ class SwipeViewController: UIViewController, ReloadInputViews {
     
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
         Actions.handleSwipe(sender)
-        if (DataModel.isFinished()) {
+        if (SwDataModel.isFinished()) {
             RoutStartViewController.shared.goToListOfProblemWordsAfterSwipe()
         }
     }
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
         Actions.handlePan(recognizer: recognizer)
-        if (DataModel.isFinished()) {
+        if (SwDataModel.isFinished()) {
             RoutStartViewController.shared.goToListOfProblemWordsAfterSwipe()
         }
     }

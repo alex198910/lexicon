@@ -119,6 +119,20 @@ class DataModel {
         }
     }
     
+    func addWord(index: Int, source: String, toSave: dictionary) {
+        var dictionaryToSave = [dictionary]()
+        dictionaryToSave.append(toSave)
+        deleteWord(index: index, source: source)
+        if source == "lexicon" {
+            saveNewLexicon(lexicon: dictionaryToSave)
+        }
+        if source == "problem" {
+            saveProblemWords(problemWords: dictionaryToSave)
+        }
+        
+        
+    }
+    
     //  возвращает отфильтрованный массив слов (из переданных, отсутствующих в CoreData)
     func filterDictionary(toSave: [dictionary], coreData: [dictionary])->[dictionary]{
         var newDictionary = [dictionary]()
