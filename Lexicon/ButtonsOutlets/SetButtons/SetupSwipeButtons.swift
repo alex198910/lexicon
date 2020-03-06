@@ -18,12 +18,24 @@ class SetupSwipeButtons {
     var superIndex = 0
     var filterButton = UIButton(type: .custom)
     var indexLabel = UILabel()
+    var mainWordButton = UIButton(type: .custom)
     
     func setup(){
         mainWord.text = SwipeDataModel.shared.getNextWord()
         setupMainWordLabel()
         setupFilterButton()
         setupIndexLabel()
+        setupMainWordButton()
+    }
+    
+    func setupMainWordButton(){
+        guard let swipeView = selfView else {return}
+        swipeView.addSubview(mainWordButton)
+        mainWordButton.translatesAutoresizingMaskIntoConstraints = false
+        mainWordButton.centerYAnchor.constraint(equalTo: swipeView.centerYAnchor, constant: 0).isActive = true
+        mainWordButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
+        mainWordButton.setTitle(mainWord.text, for: .normal)
+        mainWordButton.setTitleColor(.black, for: .normal)
     }
     
     func setupMainWordLabel(){
@@ -34,6 +46,7 @@ class SetupSwipeButtons {
         mainWord.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
         changScale()
         mainWord.sizeToFit()
+        mainWord.textColor = UIColors.shared.getBackgroundColour()
     }
     
     func changScale(){
@@ -43,22 +56,25 @@ class SetupSwipeButtons {
         if count < 12 {count = 12}
         let sscale = scale/(count)
         mainWord.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
+        mainWordButton.titleLabel?.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
     }
     
     func reloadWithOldWord(){
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-            self.mainWord.frame = self.mainWord.frame.offsetBy(dx: 0, dy: 500)
+            self.mainWordButton.frame = self.mainWordButton.frame.offsetBy(dx: 0, dy: 500)
                 })
         mainWord.text = SwipeDataModel.shared.getNextWord()
+        mainWordButton.setTitle(mainWord.text, for: .normal)
         indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         changScale()
     }
     
     func reloadWithNewWord(){
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-             self.mainWord.frame = self.mainWord.frame.offsetBy(dx: 0, dy: -500)
+             self.mainWordButton.frame = self.mainWordButton.frame.offsetBy(dx: 0, dy: -500)
                 })
         mainWord.text = SwipeDataModel.shared.getNextWord()
+        mainWordButton.setTitle(mainWord.text, for: .normal)
         indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         changScale()
     }

@@ -23,7 +23,6 @@ class SwipeViewController: UIViewController, ReloadInputViews {
         setupSwipe()
         delegating()
         SetupButtons.setup()
-        print(array)
 
         // Do any additional setup after loading the view.
     }
@@ -56,7 +55,7 @@ class SwipeViewController: UIViewController, ReloadInputViews {
         view.addGestureRecognizer(downSwipe)
         
         let pan = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
-        SetupSwipeButtons.shared.filterButton.addGestureRecognizer(pan)
+        SetupSwipeButtons.shared.mainWordButton.addGestureRecognizer(pan)
     }
     
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {
@@ -67,15 +66,20 @@ class SwipeViewController: UIViewController, ReloadInputViews {
     }
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translation(in: self.view)
-        if let view = recognizer.view {
-            view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+        Actions.handlePan(recognizer: recognizer)
+        if (DataModel.isFinished()) {
+            RoutStartViewController.shared.goToListOfProblemWordsAfterSwipe()
         }
-        recognizer.setTranslation(CGPoint.zero, in: self.view)
     }
     
     func reload() {
+        
         self.reloadInputViews()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
     }
 

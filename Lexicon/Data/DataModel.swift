@@ -59,7 +59,7 @@ class DataModel {
     // Вызывает метод сохранения в  CoreData переданных в нее проблемных слов
     private func saveProblemWords(problemWords: [dictionary]){
         let problem = filterDictionary(toSave: problemWords, coreData: getProblemWords())
-         Data.addProblemWords(listOfProblemWords: problem)
+        Data.addProblemWords(listOfProblemWords: problem)
     }
     
     // Получает массивы лексикона и проблемных слов, преобразует формат и вызывает сохранение в CoreData
@@ -122,13 +122,11 @@ class DataModel {
     //  возвращает отфильтрованный массив слов (из переданных, отсутствующих в CoreData)
     func filterDictionary(toSave: [dictionary], coreData: [dictionary])->[dictionary]{
         var newDictionary = [dictionary]()
-        var coreDataString = convertDictionaryToString(coreData)
-        coreDataString.sort()
+        let coreDataString = convertDictionaryToString(coreData)
         toSave.forEach({body in
             if coreDataString.contains(body.word ?? ""){}
             else {newDictionary.append(body) }
         })
-        newDictionary.sort()
         return(newDictionary)
     }
     
@@ -143,9 +141,9 @@ class DataModel {
         saveProblemWords(problemWords: reserveProblem)
     }
     
-    func sortDictionary(toSort: [dictionary])-> [dictionary]{
-        let newDictionary = [dictionary]()
-        return newDictionary
-    }
+//    func sortDictionary(toSort: [dictionary])-> [dictionary]{
+//        let newDictionary = [dictionary]()
+//        return newDictionary
+//    }
     
 }
