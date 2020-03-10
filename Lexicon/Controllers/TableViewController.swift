@@ -31,6 +31,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 120, right: 0)
+//            tableView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 120, right: 0)
+//            tableView.reloadData()
         }
     }
 
@@ -109,16 +111,20 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
 }
   
 
-// Работает иногда непредсказуемо из-за кривого определения ячейки,в которой вводят текст
+// Работает иногда непредсказуемо (из-за кривого определения ячейки,в которой вводят текст - скроллит вверх при обновлении)
 extension TableViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         let x = textView.superview as! CustomViewCell
         guard let i: Int = x.indexSell else {return}
+        
         link[i].translation = textView.text
         tableView.reloadData()
         print(link)
         DataModel.shared.addWord(index: i, source: pushedButtom ?? "", toSave: link[i])
-        tableView.reloadData()
+        link = DataModel.shared.getProblemWords()
+        reloadInputViews()
+        //tableView.reloadData()
+        
     }
 }

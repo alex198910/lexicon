@@ -143,12 +143,12 @@ class CoreDataManager {
     func deleteOneProblemWord(_ index: Int){
         var problem = [ProblemWords]()
         let fetch = ProblemWords.fetchRequestPW()
-        do {
+        do {""
             problem = try managedContextOfProblemWords.fetch(fetch)
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
-        print("\n\n\n ----->> \(index) \n------->>> \(problem[index].word) \n\n\n")
+        print("\n\n\n ----->> \(index) \n------->>> \(problem[index].word ?? "") \n\n\n")
         managedContextOfProblemWords.delete(problem[index])
         savingContext(context: managedContextOfProblemWords)
     }
