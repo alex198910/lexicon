@@ -20,6 +20,7 @@ class SwipeViewController: UIViewController, ReloadInputViews {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColors.shared.getBackgroundColour()
+        alertView()
         setupSwipe()
         delegating()
         SetupButtons.setup()
@@ -34,6 +35,12 @@ class SwipeViewController: UIViewController, ReloadInputViews {
         SwDataModel.reset()
         SwDataModel.array = array
         
+    }
+    
+    func alertView(){
+        let alert = UIAlertController(title: "", message: "Swipe right - unknown word \n\nSwipe left - familiar word \n\nSwipe UP - next word \n\nSwipe down - prev. word \n", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     override func viewWillLayoutSubviews() {

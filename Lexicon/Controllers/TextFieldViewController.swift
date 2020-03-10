@@ -14,6 +14,7 @@ class TextFieldViewController: UIViewController, UITextFieldDelegate {
     
     var TextField: UITextField = UITextField()
     let TextButton: UIButton = UIButton(type: .custom)
+    let InfoLabel = UILabel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,8 @@ class TextFieldViewController: UIViewController, UITextFieldDelegate {
         TextField.delegate = self
         setupTextField()
         setupTextButton()
+        setupInfolabel()
+
         // Do any additional setup after loading the view.
     }
     
@@ -46,6 +49,15 @@ class TextFieldViewController: UIViewController, UITextFieldDelegate {
         TextButton.setTitle("Start!", for: .normal)
         TextButton.titleLabel?.font = .systemFont(ofSize: 30, weight: .light)
         TextButton.addTarget(self, action:  Selector(("onTextButtonTap")), for: .touchUpInside)
+    }
+    func setupInfolabel(){
+        view.addSubview(InfoLabel)
+        InfoLabel.translatesAutoresizingMaskIntoConstraints = false
+        InfoLabel.centerYAnchor.constraint(equalTo: TextField.topAnchor, constant: -15).isActive = true
+        InfoLabel.centerXAnchor.constraint(equalTo: TextField.centerXAnchor).isActive = true
+        InfoLabel.text = "Add a text in English, then push Start"
+        InfoLabel.font = .systemFont(ofSize: 18, weight: .light)
+        InfoLabel.textColor = .white
     }
     
     @objc func onTextButtonTap() {
