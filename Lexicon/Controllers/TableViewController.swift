@@ -31,8 +31,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.dataSource = self
         view.addSubview(self.tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor).isActive = true
         tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
        }
@@ -101,6 +101,7 @@ extension TableViewController: UITextViewDelegate {
         let x = textView.superview as! CustomViewCell
         guard let i: Int = x.indexSell else {return}
         link[i].translation = textView.text
+        tableView.reloadData()
         print(link)
         DataModel.shared.addWord(index: i, source: pushedButtom ?? "", toSave: link[i])
         tableView.reloadData()

@@ -148,6 +148,7 @@ class CoreDataManager {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        print("\n\n\n ----->> \(index) \n------->>> \(problem[index].word) \n\n\n")
         managedContextOfProblemWords.delete(problem[index])
         savingContext(context: managedContextOfProblemWords)
     }
@@ -160,6 +161,7 @@ class CoreDataManager {
         } catch let error as NSError {
             print("Could not fetch. \(error), \(error.userInfo)")
         }
+        print("\n\n\n ----->> \(index) \n------->>> \(lexicon[index]) \n\n\n")
         managedContextOfLexiconWords.delete(lexicon[index])
         savingContext(context: managedContextOfLexiconWords)
     }

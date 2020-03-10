@@ -111,6 +111,7 @@ class DataModel {
     
     // удаляет одно слово из CoreData  по Index
     func deleteWord(index: Int, source: String){
+        print(" INDEX----------> \(index)\n")
         if source == "lexicon" {
             Data.deleteOneLexiconWord(index)
         }
@@ -122,12 +123,13 @@ class DataModel {
     func addWord(index: Int, source: String, toSave: dictionary) {
         var dictionaryToSave = [dictionary]()
         dictionaryToSave.append(toSave)
+        print("\n\n addWord ->>>>>> \(dictionaryToSave)\n\n\n\n")
         deleteWord(index: index, source: source)
         if source == "lexicon" {
-            saveNewLexicon(lexicon: dictionaryToSave)
+            Data.addLexicon(listOflexiconWords: dictionaryToSave)
         }
         if source == "problem" {
-            saveProblemWords(problemWords: dictionaryToSave)
+            Data.addProblemWords(listOfProblemWords: dictionaryToSave)
         }
         
         
