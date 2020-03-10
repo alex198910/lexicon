@@ -55,6 +55,7 @@ class RoutStartViewController {
         let data = DataModel.shared.convertStringToDictionary(SwipeDataModel.shared.problemWords)
         guard data.count != 0 else {return}
         let tableVC = TableViewController()
+        tableVC.pushedButtom = "swipe"
         tableVC.link = data
         navigationController?.pushViewController(tableVC, animated: true)
     }

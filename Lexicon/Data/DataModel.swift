@@ -124,11 +124,16 @@ class DataModel {
         var dictionaryToSave = [dictionary]()
         dictionaryToSave.append(toSave)
         print("\n\n addWord ->>>>>> \(dictionaryToSave)\n\n\n\n")
-        deleteWord(index: index, source: source)
+        
         if source == "lexicon" {
+            deleteWord(index: index, source: source)
             Data.addLexicon(listOflexiconWords: dictionaryToSave)
         }
         if source == "problem" {
+            deleteWord(index: index, source: source)
+            Data.addProblemWords(listOfProblemWords: dictionaryToSave)
+        }
+        if source == "swipe" {
             Data.addProblemWords(listOfProblemWords: dictionaryToSave)
         }
         
