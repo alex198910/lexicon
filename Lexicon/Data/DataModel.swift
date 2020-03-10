@@ -134,10 +134,29 @@ class DataModel {
             Data.addProblemWords(listOfProblemWords: dictionaryToSave)
         }
         if source == "swipe" {
-            Data.addProblemWords(listOfProblemWords: dictionaryToSave)
+            AddEntityTranslation(toSave: toSave)
         }
         
         
+    }
+    
+    func AddEntityTranslation(toSave: dictionary){
+        let problemWords = getProblemWords()
+        var dictToSave = toSave
+        var index = 0
+        for body in problemWords {
+            if body.word == toSave.word {
+                let SecondTranslation = toSave.translation ?? ""
+                if SecondTranslation.count == 0 {break}
+                let firstTranslation = body.translation ?? ""
+                var separator = ""
+                if firstTranslation.count > 0 {separator = " / "}
+                dictToSave.translation = SecondTranslation + separator +  firstTranslation
+                addWord(index: index, source: "problem", toSave: dictToSave)
+                break
+            }
+            index += 1
+        }
     }
     
     //  возвращает отфильтрованный массив слов (из переданных, отсутствующих в CoreData)

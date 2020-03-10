@@ -94,7 +94,9 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     */
 
 }
+  
 
+// Работает иногда непредсказуемо из-за кривого определения ячейки,в которой вводят текст
 extension TableViewController: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
