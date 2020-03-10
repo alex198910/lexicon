@@ -81,7 +81,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             DataModel.shared.deleteWord(index: indexPath.row, source: pushedButtom ?? "")
             tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
         }
-
          tableView.reloadData()
     }
     
@@ -122,7 +121,8 @@ extension TableViewController: UITextViewDelegate {
         tableView.reloadData()
         print(link)
         DataModel.shared.addWord(index: i, source: pushedButtom ?? "", toSave: link[i])
-        link = DataModel.shared.getProblemWords()
+        if pushedButtom == "problem" {link = DataModel.shared.getProblemWords()}
+        else {link = DataModel.shared.getLexiconWords()}
         reloadInputViews()
         //tableView.reloadData()
         
