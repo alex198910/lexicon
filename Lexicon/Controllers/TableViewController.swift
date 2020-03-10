@@ -19,12 +19,25 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         view.backgroundColor = UIColors.shared.getBackgroundColour()
         setupTableView()
         print(link)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         //CoreDataManager.shared.cleanLexiconWords()
         //CoreDataManager.shared.cleanProblemWords()
 
         // Do any additional setup after loading the view.
     }
     
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 120, right: 0)
+        }
+    }
+
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        tableView.contentInset = .zero
+    }
+
     func setupTableView() {
         tableView.register(CustomViewCell.self, forCellReuseIdentifier: "CustomViewCell")
         tableView.delegate = self
