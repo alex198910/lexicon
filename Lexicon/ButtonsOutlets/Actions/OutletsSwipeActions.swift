@@ -14,7 +14,7 @@ protocol ReloadInputViews {
 
 class OutletsSwipeActions {
     static let shared = OutletsSwipeActions()
-    var selfView: UIView?
+    weak var selfView: UIView?
     var delegate: ReloadInputViews?
     
     

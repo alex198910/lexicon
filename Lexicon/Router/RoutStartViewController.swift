@@ -12,7 +12,7 @@ import UIKit
 
 class RoutStartViewController {
     static let shared = RoutStartViewController()
-    var navigationController: UINavigationController?
+    weak var navigationController: UINavigationController?
     
     //Переход к контролеру для начала работы с новым текстом
     

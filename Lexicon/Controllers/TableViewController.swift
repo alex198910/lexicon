@@ -18,7 +18,6 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         view.backgroundColor = UIColors.shared.getBackgroundColour()
         setupTableView()
-        print(link)
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -119,7 +118,6 @@ extension TableViewController: UITextViewDelegate {
         
         link[i].translation = textView.text
         tableView.reloadData()
-        print(link)
         DataModel.shared.addWord(index: i, source: pushedButtom ?? "", toSave: link[i])
         if pushedButtom == "problem" {link = DataModel.shared.getProblemWords()}
         else {link = DataModel.shared.getLexiconWords()}

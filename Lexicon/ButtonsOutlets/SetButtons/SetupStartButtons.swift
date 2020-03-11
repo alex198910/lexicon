@@ -14,7 +14,7 @@ import UIKit
 class SetupStartButtons {
     static let shared = SetupStartButtons()
     
-    var selfView: UIView?
+    weak var selfView: UIView?
     let Lexicon: UIButton = UIButton(type: .custom)
     let NewButton: UIButton = UIButton(type: .custom)
     let BadWordsButton: UIButton = UIButton(type: .custom)
