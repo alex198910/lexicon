@@ -120,7 +120,7 @@ extension TableViewController: UITextViewDelegate {
         tableView.reloadData()
         DataModel.shared.addWord(index: i, source: pushedButtom ?? "", toSave: link[i])
         if pushedButtom == "problem" {link = DataModel.shared.getProblemWords()}
-        else if pushedButtom == "swipe" {link = DataModel.shared.getProblemWords()}
+        else if pushedButtom == "swipe" {}
         else if pushedButtom == "lexicon" {link = DataModel.shared.getLexiconWords()}
         reloadInputViews()
         //tableView.reloadData()
