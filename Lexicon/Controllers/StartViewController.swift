@@ -25,8 +25,8 @@ class StartViewController: UIViewController, ButtonDelegate {
     
     func delgateSelf(){
         ActionsOfOutlets.delegate = self
-        Rout.navigationController = self.navigationController
-        ButtonsView.selfView = self.view
+        Rout.NavigationController = self.navigationController
+        ButtonsView.SelfView = self.view
     }
 
     func setupView(){

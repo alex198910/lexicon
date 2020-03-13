@@ -30,8 +30,8 @@ class SwipeViewController: UIViewController, ReloadInputViews {
     
     private func delegating(){
         Actions.delegate = self
-        Actions.selfView = view
-        SetupButtons.selfView = view
+        Actions.SelfView = view
+        SetupButtons.SelfView = view
         SwDataModel.reset()
         SwDataModel.array = array
         
@@ -62,7 +62,7 @@ class SwipeViewController: UIViewController, ReloadInputViews {
         view.addGestureRecognizer(downSwipe)
         
         let pan = UIPanGestureRecognizer.init(target: self, action: #selector(handlePan(recognizer:)))
-        SetupSwipeButtons.shared.mainWordButton.addGestureRecognizer(pan)
+        SetupSwipeButtons.shared.MainWordButton.addGestureRecognizer(pan)
     }
     
     @objc func handleSwipe(sender: UISwipeGestureRecognizer) {

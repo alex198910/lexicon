@@ -14,7 +14,7 @@ protocol ReloadInputViews {
 
 class OutletsSwipeActions {
     static let shared = OutletsSwipeActions()
-    weak var selfView: UIView?
+    weak var SelfView: UIView?
     var delegate: ReloadInputViews?
     
     
@@ -64,7 +64,7 @@ class OutletsSwipeActions {
     }
     
     @objc func handlePan(recognizer: UIPanGestureRecognizer) {
-        guard let swipeView = selfView else {return}
+        guard let swipeView = SelfView else {return}
         let translation = recognizer.translation(in: swipeView)
         if let view = recognizer.view {
             view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)

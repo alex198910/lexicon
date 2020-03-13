@@ -14,7 +14,7 @@ import UIKit
 class SetupStartButtons {
     static let shared = SetupStartButtons()
     
-    weak var selfView: UIView?
+    weak var SelfView: UIView?
     let Lexicon: UIButton = UIButton(type: .custom)
     let NewButton: UIButton = UIButton(type: .custom)
     let BadWordsButton: UIButton = UIButton(type: .custom)
@@ -38,7 +38,7 @@ class SetupStartButtons {
     }
     
     func setupNewStartButton(){
-        guard let superView = selfView else {return}
+        guard let superView = SelfView else {return}
         superView.addSubview(NewButton)
         NewButton.translatesAutoresizingMaskIntoConstraints = false
         NewButton.centerYAnchor.constraint(equalTo: Lexicon.topAnchor, constant: -50).isActive = true
@@ -52,7 +52,7 @@ class SetupStartButtons {
     
 
     func setupLexiconButton(){
-        guard let superView = selfView else {return}
+        guard let superView = SelfView else {return}
         superView.addSubview(Lexicon)
         Lexicon.translatesAutoresizingMaskIntoConstraints = false
         Lexicon.centerYAnchor.constraint(equalTo: superView.centerYAnchor).isActive = true
@@ -65,7 +65,7 @@ class SetupStartButtons {
     }
     
     func setupBadWordsButtonButton(){
-        guard let superView = selfView else {return}
+        guard let superView = SelfView else {return}
         superView.addSubview(BadWordsButton)
         BadWordsButton.translatesAutoresizingMaskIntoConstraints = false
         BadWordsButton.centerYAnchor.constraint(equalTo: Lexicon.bottomAnchor, constant: 40).isActive = true

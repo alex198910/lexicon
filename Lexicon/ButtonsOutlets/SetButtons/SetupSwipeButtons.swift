@@ -13,15 +13,15 @@ import UIKit
 class SetupSwipeButtons {
     static let shared = SetupSwipeButtons()
     
-    var selfView: UIView?
-    var mainWord = UILabel()
+    var SelfView: UIView?
+    var MainWord = UILabel()
     var superIndex = 0
-    var filterButton = UIButton(type: .custom)
-    var indexLabel = UILabel()
-    var mainWordButton = UIButton(type: .custom)
+    var FilterButton = UIButton(type: .custom)
+    var IndexLabel = UILabel()
+    var MainWordButton = UIButton(type: .custom)
     
     func setup(){
-        mainWord.text = SwipeDataModel.shared.getNextWord()
+        MainWord.text = SwipeDataModel.shared.getNextWord()
         setupMainWordLabel()
         setupFilterButton()
         setupIndexLabel()
@@ -29,70 +29,70 @@ class SetupSwipeButtons {
     }
     
     func setupMainWordButton(){
-        guard let swipeView = selfView else {return}
-        swipeView.addSubview(mainWordButton)
-        mainWordButton.translatesAutoresizingMaskIntoConstraints = false
-        mainWordButton.centerYAnchor.constraint(equalTo: swipeView.centerYAnchor, constant: 0).isActive = true
-        mainWordButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
-        mainWordButton.setTitle(mainWord.text, for: .normal)
-        mainWordButton.setTitleColor(.black, for: .normal)
+        guard let swipeView = SelfView else {return}
+        swipeView.addSubview(MainWordButton)
+        MainWordButton.translatesAutoresizingMaskIntoConstraints = false
+        MainWordButton.centerYAnchor.constraint(equalTo: swipeView.centerYAnchor, constant: 0).isActive = true
+        MainWordButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
+        MainWordButton.setTitle(MainWord.text, for: .normal)
+        MainWordButton.setTitleColor(.black, for: .normal)
     }
     
     func setupMainWordLabel(){
-        guard let swipeView = selfView else {return}
-        swipeView.addSubview(mainWord)
-        mainWord.translatesAutoresizingMaskIntoConstraints = false
-        mainWord.centerYAnchor.constraint(equalTo: swipeView.centerYAnchor, constant: 0).isActive = true
-        mainWord.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
+        guard let swipeView = SelfView else {return}
+        swipeView.addSubview(MainWord)
+        MainWord.translatesAutoresizingMaskIntoConstraints = false
+        MainWord.centerYAnchor.constraint(equalTo: swipeView.centerYAnchor, constant: 0).isActive = true
+        MainWord.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
         changScale()
-        mainWord.sizeToFit()
-        mainWord.textColor = UIColors.shared.getBackgroundColour()
+        MainWord.sizeToFit()
+        MainWord.textColor = UIColors.shared.getBackgroundColour()
     }
     
     func changScale(){
-        guard let swipeView = selfView else {return}
+        guard let swipeView = SelfView else {return}
         let scale = Int(swipeView.bounds.width * 1.6)
-        var count = mainWord.text?.count ?? 100
+        var count = MainWord.text?.count ?? 100
         if count < 12 {count = 12}
         let sscale = scale/(count)
-        mainWord.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
-        mainWordButton.titleLabel?.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
+        MainWord.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
+        MainWordButton.titleLabel?.font = .systemFont(ofSize: CGFloat(sscale), weight: .bold)
     }
     
     func reloadWithOldWord(){
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-            self.mainWordButton.frame = self.mainWordButton.frame.offsetBy(dx: 0, dy: 500)
+            self.MainWordButton.frame = self.MainWordButton.frame.offsetBy(dx: 0, dy: 500)
                 })
-        mainWord.text = SwipeDataModel.shared.getNextWord()
-        mainWordButton.setTitle(mainWord.text, for: .normal)
-        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
+        MainWord.text = SwipeDataModel.shared.getNextWord()
+        MainWordButton.setTitle(MainWord.text, for: .normal)
+        IndexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         changScale()
     }
     
     func reloadWithNewWord(){
         UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseOut, animations: {
-             self.mainWordButton.frame = self.mainWordButton.frame.offsetBy(dx: 0, dy: -500)
+             self.MainWordButton.frame = self.MainWordButton.frame.offsetBy(dx: 0, dy: -500)
                 })
-        mainWord.text = SwipeDataModel.shared.getNextWord()
-        mainWordButton.setTitle(mainWord.text, for: .normal)
-        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
+        MainWord.text = SwipeDataModel.shared.getNextWord()
+        MainWordButton.setTitle(MainWord.text, for: .normal)
+        IndexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         changScale()
     }
     
     func setupFilterButton(){
-        guard let swipeView = selfView else {return}
-        swipeView.addSubview(filterButton)
-        filterButton.backgroundColor = UIColors.shared.getTextColour()
-        filterButton.setTitle(" Filter use Lexicon ", for: .normal)
-        filterButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
-        filterButton.titleLabel?.numberOfLines = 0
-        filterButton.titleLabel?.textAlignment = .center
-        filterButton.layer.cornerRadius = 10
-        filterButton.titleLabel?.textColor = .white
-        filterButton.translatesAutoresizingMaskIntoConstraints = false
-        filterButton.centerYAnchor.constraint(equalTo: swipeView.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
-        filterButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
-        filterButton.addTarget(self, action:  Selector(("filterButtonAction")), for: .touchUpInside)
+        guard let swipeView = SelfView else {return}
+        swipeView.addSubview(FilterButton)
+        FilterButton.backgroundColor = UIColors.shared.getTextColour()
+        FilterButton.setTitle(" Filter use Lexicon ", for: .normal)
+        FilterButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
+        FilterButton.titleLabel?.numberOfLines = 0
+        FilterButton.titleLabel?.textAlignment = .center
+        FilterButton.layer.cornerRadius = 10
+        FilterButton.titleLabel?.textColor = .white
+        FilterButton.translatesAutoresizingMaskIntoConstraints = false
+        FilterButton.centerYAnchor.constraint(equalTo: swipeView.safeAreaLayoutGuide.bottomAnchor, constant: -30).isActive = true
+        FilterButton.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
+        FilterButton.addTarget(self, action:  Selector(("filterButtonAction")), for: .touchUpInside)
     }
     
     @objc func filterButtonAction(){
@@ -100,13 +100,13 @@ class SetupSwipeButtons {
      }
     
     func setupIndexLabel(){
-        guard let swipeView = selfView else {return}
-        swipeView.addSubview(indexLabel)
-        indexLabel.translatesAutoresizingMaskIntoConstraints = false
-        indexLabel.centerYAnchor.constraint(equalTo: swipeView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
-        indexLabel.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
-        indexLabel.textColor = UIColors.shared.getTextColour()
-        indexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
+        guard let swipeView = SelfView else {return}
+        swipeView.addSubview(IndexLabel)
+        IndexLabel.translatesAutoresizingMaskIntoConstraints = false
+        IndexLabel.centerYAnchor.constraint(equalTo: swipeView.safeAreaLayoutGuide.topAnchor, constant: 20).isActive = true
+        IndexLabel.centerXAnchor.constraint(equalTo: swipeView.centerXAnchor, constant: 0).isActive = true
+        IndexLabel.textColor = UIColors.shared.getTextColour()
+        IndexLabel.text = "total left \(SwipeDataModel.shared.array.count) words (word \(SwipeDataModel.shared.index + 1))"
         
     }
     
