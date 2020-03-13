@@ -72,22 +72,18 @@ class OutletsSwipeActions {
         recognizer.setTranslation(CGPoint.zero, in: swipeView)
         if recognizer.state == .ended {
             if recognizer.view?.center.x ?? 0 < swipeView.center.x - swipeView.center.x/3 {
-                print(recognizer.view?.center.x ?? 0)
                 SwipeDataModel.shared.addWordToLexicon()
                 reload()
             }
             else if recognizer.view?.center.x ?? 0 > swipeView.center.x + swipeView.center.x/3 {
-                    print(recognizer.view?.center.x ?? 0)
                     SwipeDataModel.shared.addWordToProblem()
                     reload()
                 }
             else if recognizer.view?.center.y ?? 0 < swipeView.center.y - swipeView.center.y/4{
-                    print(recognizer.view?.center.y ?? 0)
                     SwipeDataModel.shared.changeIndexManual()
                     reload()
                 }
             else if recognizer.view?.center.y ?? 0 > swipeView.center.y + swipeView.center.y/4 {
-                    print(recognizer.view?.center.y ?? 0)
                     SwipeDataModel.shared.changeIndexManualBack()
                     reloadBack()
                 }
